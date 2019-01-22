@@ -8,6 +8,7 @@ using CPAT.Models;
 
 namespace CPAT.Controllers
 {
+    [Area("Academic")]
     public class HomeController : Controller
     {
         public IActionResult Index()
