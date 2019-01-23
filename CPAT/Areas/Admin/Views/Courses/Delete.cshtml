@@ -1,13 +1,13 @@
 ﻿@model CPAT.Models.Courses
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
 }
 
 <br />
 
-<h2 class="text-info">Course Details</h2>
+<h2 class="text-info">Delete Course</h2>
 
-
+<form method="post" asp-action="Delete">
     <div class="p-4 border rounded">
         
         
@@ -59,7 +59,7 @@
 
             </div>
             <div class="col-5">
-                <select asp-for="SeasonAvailability" disabled class="form-control">
+                <select disabled asp-for="SeasonAvailability" class="form-control">
                     <option value="1">Fall Only</option>
                     <option value="2">Fall and Spring</option>
                     <option value="3">Spring Only</option>
@@ -74,7 +74,8 @@
         <br />
 
         <div class="form-group">
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <input type="submit" class="btn btn-danger" asp-route-id="@Model.Id" value="Delete" />
             <a asp-action="Index" class="btn btn-success">Back to List</a>
         </div>
     </div>
+</form>

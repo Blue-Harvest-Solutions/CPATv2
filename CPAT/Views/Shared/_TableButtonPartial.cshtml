@@ -1,10 +1,6 @@
 ﻿@model int
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
-    href="@Url.Action("Edit")"
-    href="@Url.Action("Details/"+Model)"
-    href="@Url.Action("Delete/"+Model)"
 *@
 
 <td style="width: 150px">
@@ -12,10 +8,10 @@
         <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model">
             <i class="fas fa-edit"></i>
         </a>
-        <a type="button" class="btn btn-success" asp-action="Details" asp-route-id="@Model">
+        <a class="btn btn-success" asp-action="Details" asp-route-id="@Model">
             <i class="fas fa-list-alt"></i>
         </a>
-        <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model">
+        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model">
             <i class="fas fa-trash-alt"></i>
         </a>
     </div>
