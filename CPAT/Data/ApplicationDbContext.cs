@@ -15,5 +15,13 @@ namespace CPAT.Data
         }
 
         public DbSet<Courses> Courses { get; set; }
+
+        public DbSet<AcademicTerms> AcademicTerms { get; set; }
+
+        public DbSet<MajorRequirements> MajorRequirements { get; set; }
+
+        public DbSet<Students> Students { get; set; }
+
+        public DbSet<StudentPlans> StudentPlans { get; set; }
     }
 }

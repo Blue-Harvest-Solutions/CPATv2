@@ -32,7 +32,16 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Academic" asp-controller="Home" asp-action="Index">CPAT</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Courses" asp-action="Index">Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="AcademicTerms" asp-action="Index">Academic Terms</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="MajorRequirements" asp-action="Index">Major Requirements</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Academic" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -51,7 +60,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - CPAT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2019 - CPAT: Course Planning and Advising Tool - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 

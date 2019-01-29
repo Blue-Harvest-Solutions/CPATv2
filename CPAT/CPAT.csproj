@@ -6,6 +6,11 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20190129041142_addMajorRequirementsStudentsStudentPlansToDb.cs" />
+    <Compile Remove="Data\Migrations\20190129041142_addMajorRequirementsStudentsStudentPlansToDb.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -16,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

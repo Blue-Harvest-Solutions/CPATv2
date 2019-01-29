@@ -19,6 +19,7 @@ namespace CPAT.Models
         [Display(Name = "Course Name")]
         public string CourseName { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
         [Required]
@@ -27,5 +28,11 @@ namespace CPAT.Models
 
         [Display(Name = "Estimated Season Availability")]
         public int? SeasonAvailability { get; set; }
+
+        [Display(Name = "Complete?")]
+        public bool IsComplete { get; set; }
+
+        [Display(Name = "In Progress")]
+        public bool InProgress { get; set; }
     }
 }

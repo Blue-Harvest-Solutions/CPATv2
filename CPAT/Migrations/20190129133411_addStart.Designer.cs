@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CPAT.Data.Migrations
+namespace CPAT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190121173157_addCoursesToDatabase")]
-    partial class addCoursesToDatabase
+    [Migration("20190129133411_addStart")]
+    partial class addStart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,26 @@ namespace CPAT.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CPAT.Models.AcademicTerms", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId");
+
+                    b.Property<int>("Season");
+
+                    b.Property<string>("Year")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("AcademicTerms");
+                });
 
             modelBuilder.Entity("CPAT.Models.Courses", b =>
                 {
@@ -36,13 +56,79 @@ namespace CPAT.Data.Migrations
                     b.Property<int?>("CreditHours")
                         .IsRequired();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<bool>("InProgress");
+
+                    b.Property<bool>("IsComplete");
 
                     b.Property<int?>("SeasonAvailability");
 
                     b.HasKey("Id");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("CPAT.Models.MajorRequirements", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId");
+
+                    b.Property<string>("MajorName")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("MajorRequirements");
+                });
+
+            modelBuilder.Entity("CPAT.Models.StudentPlans", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MajorId");
+
+                    b.Property<int>("StudentId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MajorId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentPlans");
+                });
+
+            modelBuilder.Entity("CPAT.Models.Students", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("MI")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
+
+                    b.Property<string>("N_Number")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -208,6 +294,35 @@ namespace CPAT.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("CPAT.Models.AcademicTerms", b =>
+                {
+                    b.HasOne("CPAT.Models.Courses", "Courses")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CPAT.Models.MajorRequirements", b =>
+                {
+                    b.HasOne("CPAT.Models.Courses", "Courses")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CPAT.Models.StudentPlans", b =>
+                {
+                    b.HasOne("CPAT.Models.MajorRequirements", "MajorRequirements")
+                        .WithMany()
+                        .HasForeignKey("MajorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CPAT.Models.Students", "Students")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

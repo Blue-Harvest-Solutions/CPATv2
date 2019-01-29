@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CPAT.Models.MajorRequirements>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br /><br />
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Major Requirements List</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; New Course</a>
+    </div>
+</div>
+
+<br />
+
+<div>
+    <table class="table table-striped border">
+        <tr class="table-info">
+            <th>@Html.DisplayNameFor(m => m.MajorName)</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => c.MajorName)
+                </td>
+                <td>
+                    <partial name="_TableButtonPartial" model="c.Id" />
+                </td>
+            </tr>
+        }
+    </table>
+</div>
