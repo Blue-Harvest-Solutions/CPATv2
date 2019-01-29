@@ -40,8 +40,7 @@ namespace CPAT.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MajorRequirements majorRequirements)
         {
-            try
-            {
+            
                 if(ModelState.IsValid)
                 {
                     _db.Add(majorRequirements);
@@ -50,11 +49,7 @@ namespace CPAT.Areas.Admin.Controllers
                 }
 
                 return View(majorRequirements);
-            }
-            catch
-            {
-                return View();
-            }
+
         }
 
 

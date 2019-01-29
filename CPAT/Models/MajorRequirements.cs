@@ -14,10 +14,6 @@ namespace CPAT.Models
         [Required]
         public string MajorName { get; set; }
 
-        [Display(Name = "Course")]
-        public int CourseId { get; set; }
-
-        [ForeignKey("CourseId")]
-        public virtual Courses Courses { get; set; }
+        
     }
 }

@@ -17,10 +17,6 @@ namespace CPAT.Models
         [Required]
         public string Year { get; set; }
 
-        [Display(Name = "Course")]
-        public int CourseId { get; set; }
-
-        [ForeignKey("CourseId")]
-        public virtual Courses Courses { get; set; }
+        
     }
 }

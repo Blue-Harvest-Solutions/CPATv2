@@ -18,26 +18,30 @@
 
 <div>
     <table class="table table-striped border">
-        <tr class="table-info" >
+        <tr class="table-info">
             <th>@Html.DisplayNameFor(m => m.CourseID)</th>
             <th>@Html.DisplayNameFor(m => m.CourseName)</th>
+            <th>@Html.DisplayNameFor(m => m.SeasonAvailability)</th>
             <th></th>
             <th></th>
         </tr>
 
         @foreach(var c in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => c.CourseID)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => c.CourseName)
-                </td>
-                <td>
-                    <partial name="_TableButtonPartial" model="c.Id" />
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(m => c.CourseID)
+            </td>
+            <td>
+                @Html.DisplayFor(m => c.CourseName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => c.SeasonAvailability)
+            </td>
+            <td>
+                <partial name="_TableButtonPartial" model="c.Id" />
+            </td>
+        </tr>
         }
     </table>
 </div>
