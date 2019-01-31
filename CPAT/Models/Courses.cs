@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,10 +30,25 @@ namespace CPAT.Models
         [Display(Name = "Estimated Season Availability")]
         public int? SeasonAvailability { get; set; }
 
+        [Display(Name = "Include in Major?")]
+        public bool IncludeInMajor { get; set; }
+
         [Display(Name = "Complete?")]
         public bool IsComplete { get; set; }
 
         [Display(Name = "In Progress")]
         public bool InProgress { get; set; }
+
+        [Display(Name = "Academic Term")]
+        public int AcademicTermId { get; set; }
+
+        [ForeignKey("AcademicTermId")]
+        public virtual AcademicTerms AcademicTerms { get; set; }
+
+        [Display(Name = "Major")]
+        public int MajorRequirementsId { get; set; }
+
+        [ForeignKey("MajorRequirementsId")]
+        public virtual MajorRequirements MajorRequirements { get; set; }
     }
 }
