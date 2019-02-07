@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CPAT.Data;
 using CPAT.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CPAT.Areas.Admin.Controllers
@@ -20,14 +19,11 @@ namespace CPAT.Areas.Admin.Controllers
             _db = db;
         }
 
-
         // GET: MajorRequirements
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View(_db.MajorRequirements.ToList());
         }
-
-
 
         // GET: MajorRequirements/Create
         public ActionResult Create()
@@ -40,7 +36,6 @@ namespace CPAT.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MajorRequirements majorRequirements)
         {
-            
                 if(ModelState.IsValid)
                 {
                     _db.Add(majorRequirements);
@@ -49,7 +44,6 @@ namespace CPAT.Areas.Admin.Controllers
                 }
 
                 return View(majorRequirements);
-
         }
 
 
@@ -69,9 +63,6 @@ namespace CPAT.Areas.Admin.Controllers
 
             return View(majorRequirement);
         }
-
-
-        
 
         // GET: MajorRequirements/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -121,26 +112,31 @@ namespace CPAT.Areas.Admin.Controllers
 
 
         // GET: MajorRequirements/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var major = await _db.MajorRequirements.FindAsync(id);
+            if (major == null)
+            {
+                return NotFound();
+            }
+            return View(major);
         }
 
         // POST: MajorRequirements/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {     
+            var major = await _db.MajorRequirements.FindAsync(id);
+            _db.MajorRequirements.Remove(major);
+            await _db.SaveChangesAsync();
+           
+            return RedirectToAction(nameof(Index));
         }
     }
 }

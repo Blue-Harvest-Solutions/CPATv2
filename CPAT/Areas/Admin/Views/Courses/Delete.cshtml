@@ -9,54 +9,39 @@
 
 <form method="post" asp-action="Delete">
     <div class="p-4 border rounded">
-        
-        
         <div class="form-group row">
             <div class="col-2 text-right">
                 <label asp-for="CourseID"></label>
-
             </div>
             <div class="col-3">
                 <input asp-for="CourseID" disabled class="form-control" />
             </div>
-            
             <div class="col-2 text-right">
                 <label asp-for="CourseName"></label>
-
             </div>
             <div class="col-5">
                 <input disabled asp-for="CourseName" class="form-control" />
             </div>
-            
         </div>
-
         <br />
-
         <div class="form-group row">
             <div class="col-2 text-right">
                 <label asp-for="Description"></label>
-
             </div>
             <div class="col-10">
                 <textarea disabled asp-for="Description" class="form-control"></textarea>
             </div>
-            
         </div>
-
         <br />
-
         <div class="form-group row">
             <div class="col-2 text-right">
                 <label asp-for="CreditHours"></label>
-
             </div>
             <div class="col-2">
                 <input disabled type="number" asp-for="CreditHours" class="form-control" />
             </div>
-            
             <div class="col-3 text-right">
                 <label asp-for="SeasonAvailability"></label>
-
             </div>
             <div class="col-5">
                 <select disabled asp-for="SeasonAvailability" class="form-control">
@@ -68,11 +53,8 @@
                     <option class="alert-danger" value="0">Not Currently Offered</option>
                 </select>
             </div>
-            
         </div>
-
         <br />
-
         <div class="form-group">
             <input type="submit" class="btn btn-danger" asp-route-id="@Model.Id" value="Delete" />
             <a asp-action="Index" class="btn btn-success">Back to List</a>

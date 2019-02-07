@@ -1,13 +1,13 @@
 ﻿@model CPAT.Models.MajorRequirements
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
 }
 
 <br />
 
-<h2 class="text-info">Major Details</h2>
+<h2 class="text-info">Delete Major</h2>
 
-
+<form method="post" asp-action="Delete">
     <div class="p-4 border rounded">
         
         <div class="form-group row">
@@ -23,13 +23,9 @@
             <br />
 
             <div class="form-group">
-                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                <input type="submit" class="btn btn-danger" asp-route-id="@Model.Id" value="Delete" />
                 <a asp-action="Index" class="btn btn-success">Back to List</a>
             </div>
         </div>
     </div>
-
-
-@section Scripts{
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+</form>
