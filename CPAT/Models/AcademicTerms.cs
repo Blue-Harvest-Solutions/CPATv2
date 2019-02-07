@@ -11,12 +11,13 @@ namespace CPAT.Models
     {
         public int Id { get; set; }
 
+        [Range(0,7)]
         [Required]
         public int Season { get; set; }
 
         [Required]
         public string Year { get; set; }
 
-        
+        public ICollection<Courses> TermCourses { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using CPAT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CPAT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190207195513_updatedModels")]
+    partial class updatedModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,7 @@ namespace CPAT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AcademicTermsId");
+                    b.Property<int>("AcademicTermId");
 
                     b.Property<string>("CourseID")
                         .IsRequired();
@@ -65,15 +67,15 @@ namespace CPAT.Migrations
 
                     b.Property<bool>("IsComplete");
 
-                    b.Property<int?>("MajorRequirementsId");
+                    b.Property<int>("MajorRequirementsId");
 
-                    b.Property<int?>("PreRequisitesId");
+                    b.Property<int>("PreRequisitesId");
 
                     b.Property<int?>("SeasonAvailability");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AcademicTermsId");
+                    b.HasIndex("AcademicTermId");
 
                     b.HasIndex("MajorRequirementsId");
 
@@ -328,17 +330,20 @@ namespace CPAT.Migrations
 
             modelBuilder.Entity("CPAT.Models.Courses", b =>
                 {
-                    b.HasOne("CPAT.Models.AcademicTerms")
+                    b.HasOne("CPAT.Models.AcademicTerms", "AcademicTerms")
                         .WithMany("TermCourses")
-                        .HasForeignKey("AcademicTermsId");
+                        .HasForeignKey("AcademicTermId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CPAT.Models.MajorRequirements")
+                    b.HasOne("CPAT.Models.MajorRequirements", "MajorRequirements")
                         .WithMany("RequiredCourses")
-                        .HasForeignKey("MajorRequirementsId");
+                        .HasForeignKey("MajorRequirementsId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CPAT.Models.PreRequisites", "PreRequisites")
                         .WithMany("PreReqs")
-                        .HasForeignKey("PreRequisitesId");
+                        .HasForeignKey("PreRequisitesId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CPAT.Models.MajorRequirements", b =>

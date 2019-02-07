@@ -24,9 +24,11 @@ namespace CPAT.Models
         public string Description { get; set; }
 
         [Required]
+        [Range(0, 12)]
         [Display(Name = "Credit Hours")]
         public int? CreditHours { get; set; }
 
+        [Range(0,7)]
         [Display(Name = "Estimated Season Availability")]
         public int? SeasonAvailability { get; set; }
 
@@ -39,16 +41,7 @@ namespace CPAT.Models
         [Display(Name = "In Progress")]
         public bool InProgress { get; set; }
 
-        [Display(Name = "Academic Term")]
-        public int AcademicTermId { get; set; }
-
-        [ForeignKey("AcademicTermId")]
-        public virtual AcademicTerms AcademicTerms { get; set; }
-
-        [Display(Name = "Major")]
-        public int MajorRequirementsId { get; set; }
-
-        [ForeignKey("MajorRequirementsId")]
-        public virtual MajorRequirements MajorRequirements { get; set; }
+        [Display(Name = "Pre-requisites")]
+        public PreRequisites PreRequisites { get; set; }
     }
 }

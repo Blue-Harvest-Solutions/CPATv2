@@ -14,6 +14,7 @@ namespace CPAT.Models
         [Required]
         public string MajorName { get; set; }
 
+        public ICollection<Courses> RequiredCourses { get; set; }
         
     }
 }

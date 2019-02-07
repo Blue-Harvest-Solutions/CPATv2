@@ -4,14 +4,16 @@ using CPAT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CPAT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190207201357_updateCourseModelInDb")]
+    partial class updateCourseModelInDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +69,7 @@ namespace CPAT.Migrations
 
                     b.Property<int?>("MajorRequirementsId");
 
-                    b.Property<int?>("PreRequisitesId");
+                    b.Property<int>("PreRequisitesId");
 
                     b.Property<int?>("SeasonAvailability");
 
@@ -338,7 +340,8 @@ namespace CPAT.Migrations
 
                     b.HasOne("CPAT.Models.PreRequisites", "PreRequisites")
                         .WithMany("PreReqs")
-                        .HasForeignKey("PreRequisitesId");
+                        .HasForeignKey("PreRequisitesId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CPAT.Models.MajorRequirements", b =>

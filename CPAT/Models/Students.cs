@@ -25,6 +25,9 @@ namespace CPAT.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        public IEnumerable<MajorRequirements> Major { get; set; }
+
+        public ICollection<AcademicTerms> Terms { get; set; }
         
     }
 }
