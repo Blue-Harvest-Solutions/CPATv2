@@ -109,6 +109,53 @@ namespace CPAT.Areas.Admin.Controllers
             }
         }
 
+        //GET: MajorRequirements/AddCourses
+        public async Task<IActionResult> AddCourses (int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var major = await _db.MajorRequirements.FindAsync(id);
+            if (major == null)
+            {
+                return NotFound();
+            }
+
+            return View(major);
+        }
+
+        //POST: MajorRequirements/AddCourses
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddCourses(int id, MajorRequirements major)
+        {
+            try
+            {
+                if (id != major.Id)
+                {
+                    return NotFound();
+                }
+
+                //TODO: Add each course to the major
+
+                //foreach course that's been added/selected, add it to major
+
+                if (ModelState.IsValid)
+                {
+                    _db.Update(major);
+                    await _db.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View(major);
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
 
         // GET: MajorRequirements/Delete/5
