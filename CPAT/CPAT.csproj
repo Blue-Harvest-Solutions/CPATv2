@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Content Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Data\Migrations\20190129041142_addMajorRequirementsStudentsStudentPlansToDb.cs" />
     <Compile Remove="Data\Migrations\20190129041142_addMajorRequirementsStudentsStudentPlansToDb.Designer.cs" />
   </ItemGroup>
@@ -20,7 +27,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 

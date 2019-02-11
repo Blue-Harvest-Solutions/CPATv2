@@ -4,14 +4,16 @@ using CPAT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CPAT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190211003103_admin-josh-homecomputer")]
+    partial class adminjoshhomecomputer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,16 +29,12 @@ namespace CPAT.Migrations
 
                     b.Property<int>("Season");
 
-                    b.Property<int?>("StudentPlanViewModelId");
-
                     b.Property<int?>("StudentsId");
 
                     b.Property<string>("Year")
                         .IsRequired();
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentPlanViewModelId");
 
                     b.HasIndex("StudentsId");
 
@@ -75,8 +73,6 @@ namespace CPAT.Migrations
 
                     b.Property<int?>("SeasonAvailability");
 
-                    b.Property<int?>("StudentPlanViewModelId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AcademicTermsId");
@@ -84,8 +80,6 @@ namespace CPAT.Migrations
                     b.HasIndex("MajorRequirementsId");
 
                     b.HasIndex("PreRequisitesId");
-
-                    b.HasIndex("StudentPlanViewModelId");
 
                     b.ToTable("Courses");
                 });
@@ -99,13 +93,9 @@ namespace CPAT.Migrations
                     b.Property<string>("MajorName")
                         .IsRequired();
 
-                    b.Property<int?>("StudentPlanViewModelId");
-
                     b.Property<int?>("StudentsId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentPlanViewModelId");
 
                     b.HasIndex("StudentsId");
 
@@ -164,21 +154,6 @@ namespace CPAT.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("CPAT.Models.ViewModels.StudentPlanViewModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("StudentId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentPlanViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -348,10 +323,6 @@ namespace CPAT.Migrations
 
             modelBuilder.Entity("CPAT.Models.AcademicTerms", b =>
                 {
-                    b.HasOne("CPAT.Models.ViewModels.StudentPlanViewModel")
-                        .WithMany("Terms")
-                        .HasForeignKey("StudentPlanViewModelId");
-
                     b.HasOne("CPAT.Models.Students")
                         .WithMany("Terms")
                         .HasForeignKey("StudentsId");
@@ -370,18 +341,10 @@ namespace CPAT.Migrations
                     b.HasOne("CPAT.Models.PreRequisites", "PreRequisites")
                         .WithMany("PreReqs")
                         .HasForeignKey("PreRequisitesId");
-
-                    b.HasOne("CPAT.Models.ViewModels.StudentPlanViewModel")
-                        .WithMany("Courses")
-                        .HasForeignKey("StudentPlanViewModelId");
                 });
 
             modelBuilder.Entity("CPAT.Models.MajorRequirements", b =>
                 {
-                    b.HasOne("CPAT.Models.ViewModels.StudentPlanViewModel")
-                        .WithMany("Major")
-                        .HasForeignKey("StudentPlanViewModelId");
-
                     b.HasOne("CPAT.Models.Students")
                         .WithMany("Major")
                         .HasForeignKey("StudentsId");
@@ -398,13 +361,6 @@ namespace CPAT.Migrations
                         .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CPAT.Models.ViewModels.StudentPlanViewModel", b =>
-                {
-                    b.HasOne("CPAT.Models.Students", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
