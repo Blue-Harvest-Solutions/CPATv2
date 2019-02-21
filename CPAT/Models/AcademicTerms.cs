@@ -7,16 +7,19 @@ using System.Threading.Tasks;
 
 namespace CPAT.Models
 {
+    public enum Season
+    {
+        None, S, Su, F, FS, FSSu, SSu, SuF
+    }
+
     public class AcademicTerms
     {
         public int Id { get; set; }
 
-        [Range(0,7)]
-        [Required]
-        public int Season { get; set; }
+        public Season Season { get; set; }
 
         [Required]
-        public string Year { get; set; }
+        public DateTime Year { get; set; }
 
         public ICollection<Courses> TermCourses { get; set; }
     }

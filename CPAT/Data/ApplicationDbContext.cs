@@ -4,7 +4,7 @@ using System.Text;
 using CPAT.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CPAT.Models.ViewModels;
+
 
 namespace CPAT.Data
 {
@@ -25,6 +25,6 @@ namespace CPAT.Data
 
         public DbSet<StudentPlans> StudentPlans { get; set; }
 
-        public DbSet<CPAT.Models.ViewModels.StudentPlanViewModel> StudentPlanViewModel { get; set; }
+        //public DbSet<CPAT.Models.ViewModels.StudentPlanViewModel> StudentPlanViewModel { get; set; }
     }
 }

@@ -17,10 +17,14 @@ namespace CPAT.Models
         [ForeignKey("StudentId")]
         public virtual Students Students { get; set; }
 
+        public ICollection<AcademicTerms> Terms { get; set; }
+
+        /*
         [Display(Name = "Major")]
         public int MajorId { get; set; }
 
         [ForeignKey("MajorId")]
         public virtual MajorRequirements MajorRequirements { get; set; }
+        */
     }
 }

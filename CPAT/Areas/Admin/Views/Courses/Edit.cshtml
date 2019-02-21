@@ -55,11 +55,11 @@
             </div>
             <span asp-validation-for="CreditHours" class="text-danger"></span>
             <div class="col-3 text-right">
-                <label asp-for="SeasonAvailability"></label>
+                <label asp-for="EstSeason"></label>
 
             </div>
             <div class="col-5">
-                <select asp-for="SeasonAvailability" class="form-control">
+                <select asp-for="EstSeason" class="form-control">
                     <option value="1">Fall Only</option>
                     <option value="2">Fall & Spring</option>
                     <option value="3">Spring Only</option>
@@ -70,7 +70,7 @@
                     <option class="text-danger" value="0">Not Currently Offered</option>
                 </select>
             </div>
-            <span asp-validation-for="SeasonAvailability" class="text-danger"></span>
+            <span asp-validation-for="EstSeason" class="text-danger"></span>
         </div>
 
         <br />
