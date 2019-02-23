@@ -20,7 +20,7 @@ namespace CPAT.Models
         [Display(Name = "Course Name")]
         public string CourseName { get; set; }
 
-        [Required]
+
         public string Description { get; set; }
 
         [Required]
