@@ -9,7 +9,7 @@ namespace CPAT.Models
 {
     public enum Season
     {
-        None, S, Su, F, FS, FSSu, SSu, SuF
+        None, Spring, Summer, Fall, FS, FSSu, SSu, SuF
     }
 
     public class AcademicTerms

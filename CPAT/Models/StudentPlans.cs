@@ -11,11 +11,13 @@ namespace CPAT.Models
     {
         public int Id { get; set; }
 
+        /*
         [Display(Name = "Student")]
         public int StudentId { get; set; }
 
         [ForeignKey("StudentId")]
         public virtual Students Students { get; set; }
+        */
 
         public ICollection<AcademicTerms> Terms { get; set; }
 

@@ -33,13 +33,13 @@
 
         <div class="form-group row">
             <div class="col-2 text-right">
-                <label asp-for="Description"></label>
+                <label asp-for="DetailsLink"></label>
 
             </div>
             <div class="col-10">
-                <textarea asp-for="Description" class="form-control"></textarea>
+                <input asp-for="DetailsLink" class="form-control" />
             </div>
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <span asp-validation-for="DetailsLink" class="text-danger"></span>
         </div>
         
         <br />
@@ -59,11 +59,11 @@
             </div>
             <div class="col-5">
                 <select asp-for="EstSeason" class="form-control">
-                    <option value="1">Fall Only</option>
-                    <option value="2">Fall & Spring</option>
-                    <option value="3">Spring Only</option>
-                    <option value="4">Fall, Spring, & Summer</option>
-                    <option value="5">Summer Only</option>
+                    <option value="3">Fall Only</option>
+                    <option value="4">Fall & Spring</option>
+                    <option value="1">Spring Only</option>
+                    <option value="5">Fall, Spring, & Summer</option>
+                    <option value="2">Summer Only</option>
                     <option value="6">Spring & Summer</option>
                     <option value="7">Fall & Summer</option>
                     <option class="text-danger" value="0">Not Currently Offered</option>

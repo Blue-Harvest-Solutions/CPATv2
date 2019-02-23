@@ -41,6 +41,9 @@ namespace CPAT.Models
         [Display(Name = "In Progress")]
         public bool InProgress { get; set; }
 
+        [Display(Name = "Link to Course Details")]
+        public string DetailsLink { get; set; }
+
         /*
         [Display(Name = "Pre-requisites")]
         public PreRequisites PreRequisites { get; set; }

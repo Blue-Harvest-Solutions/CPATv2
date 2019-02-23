@@ -58,6 +58,8 @@ namespace CPAT.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<string>("DetailsLink");
+
                     b.Property<int>("EstSeason");
 
                     b.Property<bool>("InProgress");
@@ -97,11 +99,7 @@ namespace CPAT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("StudentId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("StudentPlans");
                 });
@@ -319,14 +317,6 @@ namespace CPAT.Migrations
                     b.HasOne("CPAT.Models.MajorRequirements")
                         .WithMany("RequiredCourses")
                         .HasForeignKey("MajorRequirementsId");
-                });
-
-            modelBuilder.Entity("CPAT.Models.StudentPlans", b =>
-                {
-                    b.HasOne("CPAT.Models.Students", "Students")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CPAT.Models.Students", b =>
