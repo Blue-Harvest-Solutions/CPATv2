@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,7 +10,22 @@ namespace CPAT.Models
 {
     public enum Season
     {
-        None, Spring, Summer, Fall, FS, FSSu, SSu, SuF
+        [Description("Not Currently Offered")]
+        None,
+        [Description("Spring")]
+        Spring,
+        [Description("Summer")]
+        Summer,
+        [Description("Fall")]
+        Fall,
+        [Description("Fall and Spring")]
+        FaSp,
+        [Description("Fall, Spring, and Summer")]
+        FaSpSu,
+        [Description("Spring and Summer")]
+        SpSu,
+        [Description("Summer and Fall")]
+        SuFa
     }
 
     public class AcademicTerms

@@ -34,18 +34,19 @@
             <div class="form-control">
                 @switch (Model.EstSeason)
                 {
-                    case Season.FS:
+                    case Season.FaSp:
                         Write("Fall and Spring");
                         break;
-                    case Season.FSSu:
+                    case Season.FaSpSu:
                         Write("Fall, Spring, and Summer");
                         break;
-                    case Season.SSu:
+                    case Season.SpSu:
                         Write("Spring and Summer");
                         break;
-                    case Season.SuF:
+                    case Season.SuFa:
                         Write("Summer and Fall");
                         break;
+                        
                     default:
                         Write(Model.EstSeason);
                         break;
@@ -56,7 +57,7 @@
                 <label asp-for="CreditHours"></label>
             </div>
             <div class="col-4">
-                <input readonly type="number" asp-for="CreditHours" class="form-control" />
+                <input readonly type="text" asp-for="CreditHours" class="form-control" />
             </div>
 
 
