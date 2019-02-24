@@ -15,7 +15,7 @@
                 <label asp-for="CourseID"></label>
 
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <input asp-for="CourseID" class="form-control" />
             </div>
             <span asp-validation-for="CourseID" class="text-danger"></span>
@@ -23,41 +23,23 @@
                 <label asp-for="CourseName"></label>
 
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <input asp-for="CourseName" class="form-control" />
             </div>
             <span asp-validation-for="CourseName" class="text-danger"></span>
         </div>
-        
+
+
+
         <br />
 
         <div class="form-group row">
+
             <div class="col-2 text-right">
-                <label asp-for="DetailsLink"></label>
-
-            </div>
-            <div class="col-10">
-                <input asp-for="DetailsLink" class="form-control" />
-            </div>
-            <span asp-validation-for="DetailsLink" class="text-danger"></span>
-        </div>
-        
-        <br />
-
-        <div class="form-group row">
-            <div class="col-2 text-right">
-                <label asp-for="CreditHours"></label>
-
-            </div>
-            <div class="col-2">
-                <input type="number" asp-for="CreditHours" class="form-control" />
-            </div>
-            <span asp-validation-for="CreditHours" class="text-danger"></span>
-            <div class="col-3 text-right">
                 <label asp-for="EstSeason"></label>
 
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <select asp-for="EstSeason" class="form-control">
                     <option value="3">Fall Only</option>
                     <option value="4">Fall & Spring</option>
@@ -70,8 +52,28 @@
                 </select>
             </div>
             <span asp-validation-for="EstSeason" class="text-danger"></span>
+            <div class="col-2 text-right">
+                <label asp-for="CreditHours"></label>
+
+            </div>
+            <div class="col-4">
+                <input type="number" asp-for="CreditHours" class="form-control" />
+            </div>
+            <span asp-validation-for="CreditHours" class="text-danger"></span>
+
         </div>
-        
+        <br />
+
+        <div class="form-group row">
+            <div class="col-2 text-right">
+                <label asp-for="DetailsLink"></label>
+
+            </div>
+            <div class="col-10">
+                <input asp-for="DetailsLink" class="form-control" />
+            </div>
+            <span asp-validation-for="DetailsLink" class="text-danger"></span>
+        </div>
         <br />
 
         <div class="form-group">
@@ -81,6 +83,6 @@
     </div>
 </form>
 
-@section Scripts{ 
+@section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
