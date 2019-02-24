@@ -21,7 +21,7 @@
         <tr class="table-info">
             <th>@Html.DisplayNameFor(m => m.CourseID)</th>
             <th>@Html.DisplayNameFor(m => m.CourseName)</th>
-            <th>@Html.DisplayNameFor(m => m.SeasonAvailability)</th>
+            <th>@Html.DisplayNameFor(m => m.EstSeason)</th>
             <th></th>
             <th></th>
         </tr>
@@ -36,7 +36,7 @@
                 @Html.DisplayFor(m => c.CourseName)
             </td>
             <td>
-                @Html.DisplayFor(m => c.SeasonAvailability)
+                @Html.DisplayFor(m => c.EstSeason)
             </td>
             <td>
                 <partial name="_TableButtonPartial" model="c.Id" />

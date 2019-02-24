@@ -8,49 +8,52 @@
 <h2 class="text-info">Course Details</h2>
 
 
-    <div class="p-4 border rounded">
-        <div class="form-group row">
-            <div class="col-2 text-right">
-                <label asp-for="CourseID"></label>
-            </div>
-            <div class="col-3">
-                <input asp-for="CourseID" disabled class="form-control" />
-            </div>
-            
-            <div class="col-2 text-right">
-                <label asp-for="CourseName"></label>
-            </div>
-            <div class="col-5">
-                <input disabled asp-for="CourseName" class="form-control" />
-            </div>
+<div class="p-4 border rounded">
+    <div class="form-group row">
+        <div class="col-2 text-right">
+            <label asp-for="CourseID"></label>
         </div>
-        <br />
-        <div class="form-group row">
-            <div class="col-2 text-right">
-                <label asp-for="Description"></label>
-            </div>
-            <div class="col-10">
-                <textarea disabled asp-for="Description" class="form-control"></textarea>
-            </div>
+        <div class="col-3">
+            <input asp-for="CourseID" disabled class="form-control" />
         </div>
-        <br />
-        <div class="form-group row">
-            <div class="col-2 text-right">
-                <label asp-for="CreditHours"></label>
-            </div>
-            <div class="col-2">
-                <input disabled type="number" asp-for="CreditHours" class="form-control" />
-            </div>
-            <div class="col-3 text-right">
-                <label asp-for="SeasonAvailability"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="SeasonAvailability" disabled class="form-control" />
-            </div>
+
+        <div class="col-2 text-right">
+            <label asp-for="CourseName"></label>
         </div>
-        <br />
-        <div class="form-group">
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        <div class="col-5">
+            <input disabled asp-for="CourseName" class="form-control" />
         </div>
     </div>
+    <br />
+
+    <div class="form-group row">
+        <div class="col-2 text-right">
+            <label asp-for="CreditHours"></label>
+        </div>
+        <div class="col-3">
+            <input disabled type="number" asp-for="CreditHours" class="form-control" />
+        </div>
+        <div class="col-2 text-right">
+            <label asp-for="EstSeason"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="EstSeason" disabled class="form-control" />
+        </div>
+    </div>
+    <br />
+    <div class="form-group row">
+        <div class="col-2 text-right">
+            <label asp-for="DetailsLink">Details</label>
+        </div>
+        <div class="col-6">
+            <a href="@Model.DetailsLink" class="card-link" target="_blank">UNF Link to Course Details</a>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="Index" class="btn btn-success">Back to List</a>
+    </div>
+</div>

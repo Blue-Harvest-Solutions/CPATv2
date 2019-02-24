@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CPAT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190207195513_updatedModels")]
-    partial class updatedModels
+    [Migration("20190221192403_addInitialMigration")]
+    partial class addInitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -29,14 +29,13 @@ namespace CPAT.Migrations
 
                     b.Property<int>("Season");
 
-                    b.Property<int?>("StudentsId");
+                    b.Property<int?>("StudentPlansId");
 
-                    b.Property<string>("Year")
-                        .IsRequired();
+                    b.Property<DateTime>("Year");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentsId");
+                    b.HasIndex("StudentPlansId");
 
                     b.ToTable("AcademicTerms");
                 });
@@ -47,7 +46,7 @@ namespace CPAT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AcademicTermId");
+                    b.Property<int?>("AcademicTermsId");
 
                     b.Property<string>("CourseID")
                         .IsRequired();
@@ -61,25 +60,21 @@ namespace CPAT.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<int>("EstSeason");
+
                     b.Property<bool>("InProgress");
 
                     b.Property<bool>("IncludeInMajor");
 
                     b.Property<bool>("IsComplete");
 
-                    b.Property<int>("MajorRequirementsId");
-
-                    b.Property<int>("PreRequisitesId");
-
-                    b.Property<int?>("SeasonAvailability");
+                    b.Property<int?>("MajorRequirementsId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AcademicTermId");
+                    b.HasIndex("AcademicTermsId");
 
                     b.HasIndex("MajorRequirementsId");
-
-                    b.HasIndex("PreRequisitesId");
 
                     b.ToTable("Courses");
                 });
@@ -93,24 +88,9 @@ namespace CPAT.Migrations
                     b.Property<string>("MajorName")
                         .IsRequired();
 
-                    b.Property<int?>("StudentsId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentsId");
 
                     b.ToTable("MajorRequirements");
-                });
-
-            modelBuilder.Entity("CPAT.Models.PreRequisites", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PreRequisites");
                 });
 
             modelBuilder.Entity("CPAT.Models.StudentPlans", b =>
@@ -119,15 +99,7 @@ namespace CPAT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MajorId");
-
-                    b.Property<int>("StudentId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("MajorId");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("StudentPlans");
                 });
@@ -148,10 +120,18 @@ namespace CPAT.Migrations
                         .IsRequired()
                         .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
 
+                    b.Property<int>("MajorId");
+
                     b.Property<string>("N_Number")
                         .IsRequired();
 
+                    b.Property<int>("StudentPlanId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("MajorId");
+
+                    b.HasIndex("StudentPlanId");
 
                     b.ToTable("Students");
                 });
@@ -323,46 +303,32 @@ namespace CPAT.Migrations
 
             modelBuilder.Entity("CPAT.Models.AcademicTerms", b =>
                 {
-                    b.HasOne("CPAT.Models.Students")
+                    b.HasOne("CPAT.Models.StudentPlans")
                         .WithMany("Terms")
-                        .HasForeignKey("StudentsId");
+                        .HasForeignKey("StudentPlansId");
                 });
 
             modelBuilder.Entity("CPAT.Models.Courses", b =>
                 {
-                    b.HasOne("CPAT.Models.AcademicTerms", "AcademicTerms")
+                    b.HasOne("CPAT.Models.AcademicTerms")
                         .WithMany("TermCourses")
-                        .HasForeignKey("AcademicTermId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AcademicTermsId");
 
-                    b.HasOne("CPAT.Models.MajorRequirements", "MajorRequirements")
+                    b.HasOne("CPAT.Models.MajorRequirements")
                         .WithMany("RequiredCourses")
-                        .HasForeignKey("MajorRequirementsId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CPAT.Models.PreRequisites", "PreRequisites")
-                        .WithMany("PreReqs")
-                        .HasForeignKey("PreRequisitesId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MajorRequirementsId");
                 });
 
-            modelBuilder.Entity("CPAT.Models.MajorRequirements", b =>
+            modelBuilder.Entity("CPAT.Models.Students", b =>
                 {
-                    b.HasOne("CPAT.Models.Students")
-                        .WithMany("Major")
-                        .HasForeignKey("StudentsId");
-                });
-
-            modelBuilder.Entity("CPAT.Models.StudentPlans", b =>
-                {
-                    b.HasOne("CPAT.Models.MajorRequirements", "MajorRequirements")
+                    b.HasOne("CPAT.Models.MajorRequirements", "Majors")
                         .WithMany()
                         .HasForeignKey("MajorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CPAT.Models.Students", "Students")
+                    b.HasOne("CPAT.Models.StudentPlans", "Plan")
                         .WithMany()
-                        .HasForeignKey("StudentId")
+                        .HasForeignKey("StudentPlanId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

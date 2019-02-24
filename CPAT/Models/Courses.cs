@@ -20,7 +20,7 @@ namespace CPAT.Models
         [Display(Name = "Course Name")]
         public string CourseName { get; set; }
 
-        [Required]
+
         public string Description { get; set; }
 
         [Required]
@@ -28,9 +28,9 @@ namespace CPAT.Models
         [Display(Name = "Credit Hours")]
         public int? CreditHours { get; set; }
 
-        [Range(0,7)]
+        
         [Display(Name = "Estimated Season Availability")]
-        public int? SeasonAvailability { get; set; }
+        public Season EstSeason { get; set; }
 
         [Display(Name = "Include in Major?")]
         public bool IncludeInMajor { get; set; }
@@ -41,7 +41,19 @@ namespace CPAT.Models
         [Display(Name = "In Progress")]
         public bool InProgress { get; set; }
 
+        [Display(Name = "Link to Course Details")]
+        public string DetailsLink { get; set; }
+
+        /*
         [Display(Name = "Pre-requisites")]
         public PreRequisites PreRequisites { get; set; }
+        
+
+        [Display(Name = "Major")]
+        public int MajorId { get; set; }
+
+        [ForeignKey("MajorId")]
+        public virtual MajorRequirements MajorReference { get; set; }
+        */
     }
 }

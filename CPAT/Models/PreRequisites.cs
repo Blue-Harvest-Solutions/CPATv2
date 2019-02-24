@@ -9,6 +9,6 @@ namespace CPAT.Models
     {
         public int Id { get; set; }
 
-        public IEnumerable<Courses> PreReqs { get; set; }
+        public ICollection<Courses> PreReqs { get; set; }
     }
 }
