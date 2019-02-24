@@ -61,6 +61,10 @@ namespace CPAT.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            var courseList = _db.Courses.ToList();
+            
+            ViewBag.availableCourses = courseList;
+
             return View(majorRequirement);
         }
 

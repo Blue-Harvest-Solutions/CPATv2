@@ -12,6 +12,7 @@ namespace CPAT.Models
         public int Id { get; set; }
 
         [Required]
+        [Display(Name ="Major")]
         public string MajorName { get; set; }
 
         public ICollection<Courses> RequiredCourses { get; set; }
