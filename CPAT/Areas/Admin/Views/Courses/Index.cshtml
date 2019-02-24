@@ -36,24 +36,7 @@
                 @Html.DisplayFor(m => c.CourseName)
             </td>
             <td>
-                @switch (c.EstSeason)
-                {
-                    case Season.FS:
-                        Write("Fall and Spring");
-                        break;
-                    case Season.FSSu:
-                        Write("Fall, Spring, and Summer");
-                        break;
-                    case Season.SSu:
-                        Write("Spring and Summer");
-                        break;
-                    case Season.SuF:
-                        Write("Summer and Fall");
-                        break;
-                    default:
-                        Write(c.EstSeason);
-                        break;
-                }
+                @Html.DisplayFor(m => c.EstSeason)
             </td>
             <td>
                 <partial name="_TableButtonPartial" model="c.Id" />
