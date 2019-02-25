@@ -4,10 +4,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CPAT.Migrations
 {
-    public partial class addInitialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AcademicTerms",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Season = table.Column<int>(nullable: false),
+                    Year = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AcademicTerms", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -45,6 +59,27 @@ namespace CPAT.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CourseID = table.Column<string>(nullable: false),
+                    CourseName = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    CreditHours = table.Column<int>(nullable: false),
+                    EstSeason = table.Column<int>(nullable: false),
+                    IncludeInMajor = table.Column<bool>(nullable: false),
+                    IsComplete = table.Column<bool>(nullable: false),
+                    InProgress = table.Column<bool>(nullable: false),
+                    DetailsLink = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -179,20 +214,57 @@ namespace CPAT.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AcademicTerms",
+                name: "MajorCourse",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Season = table.Column<int>(nullable: false),
-                    Year = table.Column<DateTime>(nullable: false),
+                    MajorRequirementsId = table.Column<int>(nullable: false),
+                    CoursesId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MajorCourse", x => new { x.CoursesId, x.MajorRequirementsId });
+                    table.ForeignKey(
+                        name: "FK_MajorCourse_Courses_CoursesId",
+                        column: x => x.CoursesId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MajorCourse_MajorRequirements_MajorRequirementsId",
+                        column: x => x.MajorRequirementsId,
+                        principalTable: "MajorRequirements",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CourseTerm",
+                columns: table => new
+                {
+                    CoursesId = table.Column<int>(nullable: false),
+                    AcademicTermsId = table.Column<int>(nullable: false),
+                    IsComplete = table.Column<bool>(nullable: true),
+                    InProgress = table.Column<bool>(nullable: true),
+                    Attempted = table.Column<bool>(nullable: false),
                     StudentPlansId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AcademicTerms", x => x.Id);
+                    table.PrimaryKey("PK_CourseTerm", x => new { x.CoursesId, x.AcademicTermsId });
                     table.ForeignKey(
-                        name: "FK_AcademicTerms_StudentPlans_StudentPlansId",
+                        name: "FK_CourseTerm_AcademicTerms_AcademicTermsId",
+                        column: x => x.AcademicTermsId,
+                        principalTable: "AcademicTerms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CourseTerm_Courses_CoursesId",
+                        column: x => x.CoursesId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CourseTerm_StudentPlans_StudentPlansId",
                         column: x => x.StudentPlansId,
                         principalTable: "StudentPlans",
                         principalColumn: "Id",
@@ -228,45 +300,6 @@ namespace CPAT.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CourseID = table.Column<string>(nullable: false),
-                    CourseName = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
-                    CreditHours = table.Column<int>(nullable: false),
-                    EstSeason = table.Column<int>(nullable: false),
-                    IncludeInMajor = table.Column<bool>(nullable: false),
-                    IsComplete = table.Column<bool>(nullable: false),
-                    InProgress = table.Column<bool>(nullable: false),
-                    AcademicTermsId = table.Column<int>(nullable: true),
-                    MajorRequirementsId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Courses_AcademicTerms_AcademicTermsId",
-                        column: x => x.AcademicTermsId,
-                        principalTable: "AcademicTerms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Courses_MajorRequirements_MajorRequirementsId",
-                        column: x => x.MajorRequirementsId,
-                        principalTable: "MajorRequirements",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AcademicTerms_StudentPlansId",
-                table: "AcademicTerms",
-                column: "StudentPlansId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -308,13 +341,18 @@ namespace CPAT.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_AcademicTermsId",
-                table: "Courses",
+                name: "IX_CourseTerm_AcademicTermsId",
+                table: "CourseTerm",
                 column: "AcademicTermsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_MajorRequirementsId",
-                table: "Courses",
+                name: "IX_CourseTerm_StudentPlansId",
+                table: "CourseTerm",
+                column: "StudentPlansId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MajorCourse_MajorRequirementsId",
+                table: "MajorCourse",
                 column: "MajorRequirementsId");
 
             migrationBuilder.CreateIndex(
@@ -346,7 +384,10 @@ namespace CPAT.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "CourseTerm");
+
+            migrationBuilder.DropTable(
+                name: "MajorCourse");
 
             migrationBuilder.DropTable(
                 name: "Students");
@@ -359,6 +400,9 @@ namespace CPAT.Migrations
 
             migrationBuilder.DropTable(
                 name: "AcademicTerms");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
 
             migrationBuilder.DropTable(
                 name: "MajorRequirements");

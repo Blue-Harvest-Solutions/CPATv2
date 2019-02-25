@@ -38,8 +38,15 @@ namespace CPAT.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create (Courses courses)
         {
+            
             if(ModelState.IsValid)
             {
+                Courses existingCourse = _db.Courses.SingleOrDefault(m => m.CourseID == courses.CourseID);
+                if(existingCourse != null)
+                {
+                    ViewBag.msg = "Already exists.";
+                    return View(courses);
+                }
                 _db.Add(courses);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -27,15 +27,34 @@ namespace CPAT.Migrations
 
                     b.Property<int>("Season");
 
-                    b.Property<int?>("StudentPlansId");
-
                     b.Property<DateTime>("Year");
 
                     b.HasKey("Id");
 
+                    b.ToTable("AcademicTerms");
+                });
+
+            modelBuilder.Entity("CPAT.Models.CourseTerm", b =>
+                {
+                    b.Property<int>("CoursesId");
+
+                    b.Property<int>("AcademicTermsId");
+
+                    b.Property<bool>("Attempted");
+
+                    b.Property<bool?>("InProgress");
+
+                    b.Property<bool?>("IsComplete");
+
+                    b.Property<int?>("StudentPlansId");
+
+                    b.HasKey("CoursesId", "AcademicTermsId");
+
+                    b.HasIndex("AcademicTermsId");
+
                     b.HasIndex("StudentPlansId");
 
-                    b.ToTable("AcademicTerms");
+                    b.ToTable("CourseTerm");
                 });
 
             modelBuilder.Entity("CPAT.Models.Courses", b =>
@@ -43,8 +62,6 @@ namespace CPAT.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AcademicTermsId");
 
                     b.Property<string>("CourseID")
                         .IsRequired();
@@ -67,15 +84,22 @@ namespace CPAT.Migrations
 
                     b.Property<bool>("IsComplete");
 
-                    b.Property<int?>("MajorRequirementsId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("AcademicTermsId");
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("CPAT.Models.MajorCourse", b =>
+                {
+                    b.Property<int>("CoursesId");
+
+                    b.Property<int>("MajorRequirementsId");
+
+                    b.HasKey("CoursesId", "MajorRequirementsId");
 
                     b.HasIndex("MajorRequirementsId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("MajorCourse");
                 });
 
             modelBuilder.Entity("CPAT.Models.MajorRequirements", b =>
@@ -300,22 +324,34 @@ namespace CPAT.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CPAT.Models.AcademicTerms", b =>
+            modelBuilder.Entity("CPAT.Models.CourseTerm", b =>
                 {
+                    b.HasOne("CPAT.Models.AcademicTerms", "Terms")
+                        .WithMany("CourseTerms")
+                        .HasForeignKey("AcademicTermsId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CPAT.Models.Courses", "Courses")
+                        .WithMany("CourseTerms")
+                        .HasForeignKey("CoursesId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("CPAT.Models.StudentPlans")
                         .WithMany("Terms")
                         .HasForeignKey("StudentPlansId");
                 });
 
-            modelBuilder.Entity("CPAT.Models.Courses", b =>
+            modelBuilder.Entity("CPAT.Models.MajorCourse", b =>
                 {
-                    b.HasOne("CPAT.Models.AcademicTerms")
-                        .WithMany("TermCourses")
-                        .HasForeignKey("AcademicTermsId");
+                    b.HasOne("CPAT.Models.Courses", "Courses")
+                        .WithMany("MajorCourses")
+                        .HasForeignKey("CoursesId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CPAT.Models.MajorRequirements")
-                        .WithMany("RequiredCourses")
-                        .HasForeignKey("MajorRequirementsId");
+                    b.HasOne("CPAT.Models.MajorRequirements", "MajorRequirements")
+                        .WithMany("MajorCourses")
+                        .HasForeignKey("MajorRequirementsId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CPAT.Models.Students", b =>

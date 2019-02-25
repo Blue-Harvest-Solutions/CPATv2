@@ -9,7 +9,7 @@ namespace CPAT.Models
 {
     public class Courses
     {
-
+        
         public int Id { get; set; }
 
         [Required]
@@ -20,7 +20,6 @@ namespace CPAT.Models
         [Display(Name = "Course Name")]
         public string CourseName { get; set; }
 
-
         public string Description { get; set; }
 
         [Required]
@@ -28,7 +27,6 @@ namespace CPAT.Models
         [Display(Name = "Credit Hours")]
         public int? CreditHours { get; set; }
 
-        
         [Display(Name = "Estimated Season Availability")]
         public Season EstSeason { get; set; }
 
@@ -36,13 +34,17 @@ namespace CPAT.Models
         public bool IncludeInMajor { get; set; }
 
         [Display(Name = "Complete?")]
-        public bool IsComplete { get; set; }
+        public bool IsComplete { get; set; } = false;
 
         [Display(Name = "In Progress")]
-        public bool InProgress { get; set; }
+        public bool InProgress { get; set; } = false;
 
         [Display(Name = "Link to Course Details")]
         public string DetailsLink { get; set; }
+
+        public virtual ICollection<MajorCourse> MajorCourses { get; set; }
+
+        public virtual ICollection<CourseTerm> CourseTerms { get; set; }
 
         /*
         [Display(Name = "Pre-requisites")]

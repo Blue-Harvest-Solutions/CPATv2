@@ -37,6 +37,6 @@ namespace CPAT.Models
         [Required]
         public DateTime Year { get; set; }
 
-        public ICollection<Courses> TermCourses { get; set; }
+        public virtual ICollection<CourseTerm> CourseTerms { get; set; }
     }
 }

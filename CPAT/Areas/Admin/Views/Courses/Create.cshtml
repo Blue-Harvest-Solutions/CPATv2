@@ -7,6 +7,10 @@
 
 <h2 class="text-info">Add Course</h2>
 
+<div class="alert-danger text-center">
+    @ViewBag.msg
+</div>
+
 <form method="post" asp-action="Create">
     <div class="p-4 border rounded">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
