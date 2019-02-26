@@ -31,28 +31,33 @@
         <table class="table table-striped border">
             <tr class="table-info">
                 <th>Course ID</th>
-                <th>Course Name</th>
+                <th colspan="3">Course Name</th>
                 <th>Credit Hours</th>
             </tr>
 
-            @foreach (var c in ViewBag.availableCourses)
+            @foreach (var c in ViewBag.majorCoursesAssigned)
             {
                 <tr>
-                    <td>@c.CourseID</td>
-                    <td>@c.CourseName</td>
-                    <td>@c.CreditHours</td>
+                    <td>@c.Courses.CourseID</td>
+                    <td colspan="3">@c.Courses.CourseName</td>
+                    <td>@c.Courses.CreditHours</td>
                 </tr>
 
             }
 
         </table>
     </div>
+    <!--
+    <div class="col-2">
+
+    </div>
+    -->
     <div class="col-6">
         <h2 class="text-md-center">Available</h2>
         <table class="table table-striped border">
             <tr class="table-info">
                 <th>Course ID</th>
-                <th>Course Name</th>
+                <th colspan="3">Course Name</th>
                 <th>Credit Hours</th>
             </tr>
 
@@ -60,7 +65,7 @@
             {
                 <tr>
                     <td>@c.CourseID</td>
-                    <td>@c.CourseName</td>
+                    <td colspan="3">@c.CourseName</td>
                     <td>@c.CreditHours</td>
                 </tr>
 

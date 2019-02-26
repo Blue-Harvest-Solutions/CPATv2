@@ -9,21 +9,26 @@
 <h4>AcademicTerms</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group col-md-4">
                 <label asp-for="Season" class="control-label"></label>
-                <input asp-for="Season" class="form-control" />
+                <select asp-for="Season" class="form-control">
+                    <option hidden value="-1">Select</option>
+                    <option value="3">Fall</option>
+                    <option value="1">Spring</option>
+                    <option value="2">Summer</option>
+                </select>
                 <span asp-validation-for="Season" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-4">
                 <label asp-for="Year" class="control-label"></label>
                 <input asp-for="Year" class="form-control" />
                 <span asp-validation-for="Year" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </form>
     </div>

@@ -61,9 +61,27 @@ namespace CPAT.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            var majorCourses = _db.MajorCourse.Where(m => m.MajorRequirementsId == id).ToList();
+
             var courseList = _db.Courses.ToList();
+
+            /*
+            ViewBag.unassignedCourses = courseList
+                .GroupJoin(
+                majorCourses, course => course.Id,
+                majorCourse => majorCourse.Courses.Id,
+                (course, courseGroup) => new
+                {
+                    CID = course.Id,
+                    CourseCount = courseGroup.Count()
+                });
+
+            */
+
             
             ViewBag.availableCourses = courseList;
+
+            ViewBag.majorCoursesAssigned = majorCourses;
 
             return View(majorRequirement);
         }
