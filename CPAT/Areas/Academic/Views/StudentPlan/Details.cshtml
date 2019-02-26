@@ -6,38 +6,70 @@
 
 <h1>Plan Details</h1>
 
-<div class="row">
-    <div class="col-3">
-        <label asp-for="FirstName"></label>
-    </div>
-    <div class="col-4">
-        <input disabled asp-for="FirstName" />
-    </div>
-    <div class="col-2">
-        <label asp-for="MI"></label>
-    </div>
-    <div class="col-3">
-        <input disabled asp-for="MI" />
+<div class="p-4 border rounded">
+
+    <div class="form-group row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2 text-right">
+                    <label asp-for="N_Number"></label>
+                </div>
+                <div class="col-4">
+                    <input readonly asp-for="N_Number" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2 text-right">
+                    <label asp-for="FirstName"></label>
+                </div>
+                <div class="col-4">
+                    <input readonly asp-for="FirstName" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 text-right">
+                    <label asp-for="MI"></label>
+                </div>
+                <div class="col-2">
+                    <input readonly asp-for="MI" />
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-2 text-right">
+                    <label asp-for="LastName"></label>
+                </div>
+                <div class="col-4">
+                    <input readonly asp-for="LastName" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2 text-right">
+                    <label asp-for="Majors">Major</label>
+                </div>
+                <div class="col-4">
+                    <input readonly asp-for="Majors.MajorName" />
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-4">
-        <label asp-for="LastName"></label>
-    </div>
-    <div class="col-8">
-        <input disabled asp-for="LastName" />
-    </div>
-</div>
+<br />
+<br />
 
 <div class="row">
     <div class="col-6">
-        <h2 class="jumbotron">Student Plan</h2>
+        <h2 class="h3">Student Plan</h2>
     </div>
 </div>
 
-@foreach (var t in Model.Plan.Terms)
-{
+@*
+    @foreach (var t in Model.Plan.Terms)
+    {
     <div class="row">
         <div class="col-lg-4">
             @t.Terms.Season
@@ -46,19 +78,19 @@
             @t.Terms.Year
         </div>
     </div>
-    @foreach (CourseTerm c in t.Terms.CourseTerms)
-    {
-        <div class="row">
-            <div class="col-3">
-                @c.Courses.CourseID
+        @foreach (CourseTerm c in t.Terms.CourseTerms)
+        {
+            <div class="row">
+                <div class="col-3">
+                    @c.Courses.CourseID
+                </div>
+                <div class="col-7">
+                    @c.Courses.CourseName
+                </div>
+                <div class="col-2">
+                    @c.Courses.CreditHours
+                </div>
             </div>
-            <div class="col-7">
-                @c.Courses.CourseName
-            </div>
-            <div class="col-2">
-                @c.Courses.CreditHours
-            </div>
-        </div>
+        }
     }
-
-}
+*@

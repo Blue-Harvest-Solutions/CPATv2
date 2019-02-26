@@ -6,6 +6,7 @@ using CPAT.Models;
 using CPAT.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CPAT.Areas.Academic.Controllers
 {
@@ -21,13 +22,22 @@ namespace CPAT.Areas.Academic.Controllers
         }
 
         // GET: StudentPlan
-        public ActionResult Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View();
+            var student = from s in _db.Students
+                          select s;
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                student = student.Where(s => s.LastName.StartsWith(searchString));
+                //studentId = student.Select(id => id.Id);
+            }
+
+            return RedirectToAction(nameof(Details), await student.FirstOrDefaultAsync());//
         }
 
         // GET: StudentPlan/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Students student)//int id
         {
             return View();
         }
