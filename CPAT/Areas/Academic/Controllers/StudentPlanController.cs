@@ -33,6 +33,8 @@ namespace CPAT.Areas.Academic.Controllers
                 //studentId = student.Select(id => id.Id);
             }
 
+            //ViewBag.tempMajorName = _db.MajorRequirements.FindAsync(student.)
+
             return RedirectToAction(nameof(Details), await student.FirstOrDefaultAsync());//
         }
 
