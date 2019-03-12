@@ -1,0 +1,67 @@
+﻿@model CPAT.Models.Students
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<h1>Plan Details</h1>
+
+<div class="row">
+    <div class="col-3">
+        <label asp-for="FirstName"></label>
+    </div>
+    <div class="col-4">
+        <input disabled asp-for="FirstName" />
+    </div>
+    <div class="col-2">
+        <label asp-for="MI"></label>
+    </div>
+    <div class="col-3">
+        <input disabled asp-for="MI" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4">
+        <label asp-for="LastName"></label>
+    </div>
+    <div class="col-8">
+        <input disabled asp-for="LastName" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="jumbotron">Student Plan</h2>
+    </div>
+</div>
+
+@*
+@foreach (AcademicTerms t in Model.Plan.Terms)
+{
+    <div class="row">
+        <div class="col-lg-4">
+            @t.Season
+        </div>
+        <div class="col-lg-4">
+            @t.Year
+        </div>
+    </div>
+
+    @foreach (Courses c in t.CourseTerms)
+    {
+        <div class="row">
+            <div class="col-3">
+                @c.CourseID
+            </div>
+            <div class="col-7">
+                @c.CourseName
+            </div>
+            <div class="col-2">
+                @c.CreditHours
+            </div>
+        </div>
+    }
+
+}
+*@
