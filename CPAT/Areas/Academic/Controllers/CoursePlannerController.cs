@@ -38,7 +38,7 @@ namespace CPAT.Areas.Academic.Controllers
             lstCourseCart.Add(id);
             HttpContext.Session.Set("sessionCourseCart", lstCourseCart);
 
-            return RedirectToAction("Index", "Academic", new { area = "Academix" });
+            return RedirectToAction("Index", "Academic", new { area = "Academic" });
         }
     }             
 }
