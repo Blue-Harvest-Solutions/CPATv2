@@ -51,20 +51,31 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Academic" asp-controller="StudentPlan" asp-action="Index">Student Plan</a>
                         </li>
-                        @*
+
                         @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("sessionCourseCart") != null)
                         {
-                            <li style="color:white">
+                            <li style="color:black">
 
-                                <a asp-area="Admin" asp-controller="CoursePlannerCart" asp-action="Index" class="nav-link">
-                                    @{ 
-                                        var count = 1;
-                                        @*var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("sessionCourseCart").Count;
+                                <a asp-area="Academic" asp-controller="CourseCart" asp-action="Index" class="nav-link text-dark">
+                                    <i>Courses in cart</i>
+                                    @{
+                                        var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("sessionCourseCart").Count;
                                     }
+                                    (@count)
                                 </a>
-                                (@count)
+
                             </li>
-                        }*@
+                        }
+                        else
+                        {
+                            <li style="color:black">
+                                <a asp-area="Academic" asp-controller="CourseCart" asp-action="Index" class="nav-link text-dark">
+                                    <i>Courses in cart</i> &nbsp;
+
+                                    (0)
+                                </a>
+                            </li>
+                        }
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Academic" asp-controller="Home" asp-action="Privacy">Privacy</a>
