@@ -28,11 +28,11 @@
                 }
                 @if (isInCart)
                 {
-                    <button type="submit" value="Remove Course" asp-action="remove" asp-route-id="index" class="btn btn-success">Remove Course</button>
+                    <button type="submit" value="Remove Course" asp-action="remove" asp-route-id="@course.Id" class="btn btn-danger">Remove Course</button>
                 }
                 else
                 {
-                    <button type="submit" value="Add Course" asp-route-id="index" class="btn btn-success">Add Course</button>
+                    <button type="submit" value="Add Course" asp-route-id="@course.Id" class="btn btn-success">Add Course</button>
                 }
 
             </div>

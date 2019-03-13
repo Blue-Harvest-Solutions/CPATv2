@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CPAT.Models;
+using CPAT.Extensions;
+
 
 namespace CPAT.Controllers
 {
@@ -12,7 +14,7 @@ namespace CPAT.Controllers
     public class HomeController : Controller
     {
         public IActionResult Index()
-        {
+        { 
             return View();
         }
 
