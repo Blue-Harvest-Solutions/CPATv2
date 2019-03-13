@@ -61,5 +61,19 @@ namespace CPAT.Areas.Academic.Controllers
             }
         }
         */
+
+        public IActionResult Remove(int id)
+        {
+            List<int> lstCourseItems = HttpContext.Session.Get<List<int>>("sessionCourseCart");
+
+            if (lstCourseItems.Count > 0)
+            {
+                lstCourseItems.Remove(id);
+            }
+
+            HttpContext.Session.Set("sessionCourseCart", lstCourseItems);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
