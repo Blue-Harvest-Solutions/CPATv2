@@ -5,35 +5,38 @@
     ViewData["Title"] = "Index";
 }
 
-@inject IHttpContextAccessor HttpContextAccessor 
+@inject IHttpContextAccessor HttpContextAccessor
 
 <br /><br />
-<div class="row">
-    @foreach (var course in Model)
-    {
-    <div class="card col-3">
-        <div class="mb-4">@course.CourseName (@course.CourseID)</div>
 
-        
-        @{
-            bool isInCart = false;
-            List<int> lstCart = HttpContextAccessor.HttpContext.Session.Get<List<int>>("sessionCourseCart");
-            if (lstCart != null && lstCart.Contains(course.Id))
-            {
-                isInCart = true;
-            }
+<form method="post">
+    <div class="row">
+        @foreach (var course in Model)
+        {
+            <div class="card col-3">
+                <div class="mb-4">@course.CourseName (@course.CourseID)</div>
+
+
+                @{
+                    bool isInCart = false;
+                    List<int> lstCart = HttpContextAccessor.HttpContext.Session.Get<List<int>>("sessionCourseCart");
+                    if (lstCart != null && lstCart.Contains(course.Id))
+                    {
+                        isInCart = true;
+                    }
+
+                }
+                @if (isInCart)
+                {
+                    <button type="submit" value="Remove Course" asp-action="remove" asp-route-id="index" class="btn btn-success">Remove Course</button>
+                }
+                else
+                {
+                    <button type="submit" value="Add Course" asp-route-id="index" class="btn btn-success">Add Course</button>
+                }
+
+            </div>
 
         }
-        @if (isInCart)
-        {
-        <button type="submit" value="Remove Course" asp-action="remove" asp-route-id="Id" class="btn btn-success">Remove Course</button>
-        }
-        else
-        {
-            <button type="submit" value="Add Course" asp-route-id="Id" class="btn btn-success">Add Course</button>
-        }
-        
     </div>
-
-    }
-</div>
+</form>
