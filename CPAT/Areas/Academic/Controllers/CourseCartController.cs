@@ -43,6 +43,10 @@ namespace CPAT.Areas.Academic.Controllers
             return View(CourseCartviewmodel);
         }
 
+
+        //*********
+        //Figure this out later
+        //******
         /*
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -51,16 +55,24 @@ namespace CPAT.Areas.Academic.Controllers
         {
             List<int> lstCourseItems = HttpContext.Session.Get<List<int>>("sessionCourseCart");
 
-            CourseCartviewmodel.Courses.
-
-            int courseId = course.Id;
+            int courseId = courses.id;
 
             foreach (int courseId in lstCourseItems)
             {
-
+                CoursesSelectedForTerm coursesSelectedForTerm = new CoursesSelectedForTerm()
+                {
+                    PlanCourseId = courseId
+                };
+                _db.CoursesSelectedForTerm.Add(coursesSelectedForTerm);
             }
+            _db.SaveChanges(); 
+            lstCourseItems = new List<int>();
+            HttpContext.Session.Set("sessionCourseCart", lstCourseItems);
+
+            return RedirectToAction("ConfirmationPage", "CourseCart", new { id = courseId });
         }
         */
+        
 
         public IActionResult Remove(int id)
         {
