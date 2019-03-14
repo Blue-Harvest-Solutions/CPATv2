@@ -30,7 +30,7 @@ namespace CPAT.Areas.Academic.Controllers
 
         [HttpPost, ActionName("Index")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> IndexPost(int id)
+        public IActionResult IndexPost(int id)
         {
             List<int> lstCourseCart = HttpContext.Session.Get<List<int>>("sessionCourseCart");
             if (lstCourseCart == null)

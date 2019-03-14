@@ -16,14 +16,14 @@
                 <div class="col-8" style="border-right:1px solid #bbb9b9;">
                     <table class="table table-striped" width="100%">
                         <tr class="table-info">
-                            <th style="text-align:center; width:20%"></th>
+                            
                             <th style="text-align:center;">
                                 <label asp-for="@Model.Courses.FirstOrDefault().CourseName"></label>
                             </th>
                             <th style="text-align:center;">
                                 <label asp-for="@Model.Courses.FirstOrDefault().CourseID"></label>
                             </th>
-                            <th style="text-align:center;"></th>
+                            <th style="text-align:center;">Remove</th>
                         </tr>
                         @foreach (var item in Model.Courses)
                         {
@@ -33,7 +33,7 @@
                                     @Html.DisplayFor(c => item.CourseName)
                                 </td>
                                 <td style="text-align:center">
-                                    @Html.DisplayFor(c => item.CourseID)
+                                    <a href="@item.DetailsLink" target="_blank"> @Html.DisplayFor(c => item.CourseID)</a>
                                 </td>
                                 <td style="text-align:center">
                                     <button type="submit" class="btn btn-danger" asp-action="remove" asp-route-id="@item.Id">

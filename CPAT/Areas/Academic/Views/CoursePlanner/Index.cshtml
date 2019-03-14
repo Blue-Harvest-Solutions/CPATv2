@@ -14,8 +14,8 @@
         @foreach (var course in Model)
         {
         <div class="card col-4">
-            <div class="mb-1"><h4><b>Course Name:</b> @course.CourseName</h4></div>
-            <div class="mb-1"><h5><b>Course ID:</b> @course.CourseID</h5></div>
+            <div class="mb-1"><b>@course.CourseName</b></div>
+            <div class="mb-1"><b>Course ID:</b> @course.CourseID</div>
             <div class="mb-3"><b>Credits:</b> @course.CreditHours</div>
             @if (course.DetailsLink == null)
             {
@@ -23,7 +23,7 @@
             }
             else
             {
-                <div class="mb-4"><a href="http://@course.DetailsLink">Course Details</a></div>
+                <div class="mb-4"><a href="@course.DetailsLink" target="_blank">Course Details</a></div>
             }
 
 
