@@ -4,11 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using CPAT.Data;
 using CPAT.Models;
+using CPAT.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CPAT.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.SuperAdminEndUser)]
     [Area("Admin")]
     public class CoursesController : Controller
     {

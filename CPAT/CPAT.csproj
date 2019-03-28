@@ -9,10 +9,6 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20190129041142_addMajorRequirementsStudentsStudentPlansToDb.cs" />
     <Compile Remove="Data\Migrations\20190129041142_addMajorRequirementsStudentsStudentPlansToDb.Designer.cs" />
-    <Compile Remove="Migrations\20190221192233_addInitialMigration.cs" />
-    <Compile Remove="Migrations\20190221192233_addInitialMigration.Designer.cs" />
-    <Compile Remove="Migrations\20190225045303_markedCourseIDAsKeyInModel.cs" />
-    <Compile Remove="Migrations\20190225045303_markedCourseIDAsKeyInModel.Designer.cs" />
   </ItemGroup>
 
 
@@ -24,6 +20,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\AdminUsers\" />
     <Folder Include="Controllers\" />
     <Folder Include="Data\Migrations\" />
   </ItemGroup>

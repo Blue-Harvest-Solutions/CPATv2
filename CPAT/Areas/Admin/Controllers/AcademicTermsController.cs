@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CPAT.Data;
 using CPAT.Models;
+using CPAT.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CPAT.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.SuperAdminEndUser)]
     [Area("Admin")]
     public class AcademicTermsController : Controller
     {

@@ -42,5 +42,7 @@ namespace CPAT.Data
         //public DbSet<CPAT.Models.ViewModels.StudentPlanViewModel> StudentPlanViewModel { get; set; }
 
         //public DbSet<CoursesSelectedForTerm> CoursesSelectedForTerm { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }
