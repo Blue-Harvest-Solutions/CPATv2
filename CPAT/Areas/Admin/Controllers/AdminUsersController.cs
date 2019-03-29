@@ -6,6 +6,7 @@ using CPAT.Data;
 using CPAT.Models;
 using CPAT.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CPAT.Areas.Admin.Controllers
@@ -14,12 +15,16 @@ namespace CPAT.Areas.Admin.Controllers
     [Area("Admin")]
     public class AdminUsersController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         private readonly ApplicationDbContext _db;
 
-        public AdminUsersController(ApplicationDbContext db)
+        public AdminUsersController(ApplicationDbContext db, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _db = db;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -46,7 +51,7 @@ namespace CPAT.Areas.Admin.Controllers
         //Post Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(string id, ApplicationUser applicationUser)
+        public async Task<IActionResult> Edit(string id, ApplicationUser applicationUser)
         {
             if (id != applicationUser.Id)
             {
@@ -59,6 +64,35 @@ namespace CPAT.Areas.Admin.Controllers
                 userFromDb.Name = applicationUser.Name;
                 userFromDb.IsAdvisor = applicationUser.IsAdvisor;
                 userFromDb.IsSuperAdmin = applicationUser.IsSuperAdmin;
+
+                if (!await _roleManager.RoleExistsAsync(SD.AdvisorEndUser))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(SD.AdvisorEndUser));
+                }
+                if (!await _roleManager.RoleExistsAsync(SD.SuperAdminEndUser))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(SD.SuperAdminEndUser));
+                }
+                if (!await _roleManager.RoleExistsAsync(SD.RegularEndUser))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(SD.RegularEndUser));
+                }
+
+                if (userFromDb.IsSuperAdmin)
+                {
+                    await _userManager.AddToRoleAsync(userFromDb, SD.SuperAdminEndUser);
+                }
+                else if (userFromDb.IsAdvisor)
+                {
+                    await _userManager.AddToRoleAsync(userFromDb, SD.AdvisorEndUser);
+                }
+                else if (!userFromDb.IsAdvisor || !userFromDb.IsSuperAdmin)
+                {
+                    var roles = await _userManager.GetRolesAsync(userFromDb);
+                    await _userManager.RemoveFromRolesAsync(userFromDb, roles.ToArray());
+                    await _userManager.AddToRoleAsync(userFromDb, SD.RegularEndUser);
+                }
+
 
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index));

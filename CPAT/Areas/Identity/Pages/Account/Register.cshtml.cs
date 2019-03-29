@@ -115,7 +115,7 @@ namespace CPAT.Areas.Identity.Pages.Account
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    return RedirectToAction("Index", "AdminUsers", new { area = "Admin" });
+                    return RedirectToAction("Index", "Home", new { area = "Academic" });
                 }
                 foreach (var error in result.Errors)
                 {
