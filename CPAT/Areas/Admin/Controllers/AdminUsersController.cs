@@ -57,6 +57,8 @@ namespace CPAT.Areas.Admin.Controllers
             {
                 ApplicationUser userFromDb = _db.ApplicationUser.Where(u => u.Id == id).FirstOrDefault();
                 userFromDb.Name = applicationUser.Name;
+                userFromDb.IsAdvisor = applicationUser.IsAdvisor;
+                userFromDb.IsSuperAdmin = applicationUser.IsSuperAdmin;
 
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index));

@@ -24,7 +24,7 @@
     <table class="table table-striped border">
         <tr class="table-info">
             <th>
-                @Html.DisplayNameFor(m => m.Id)
+                Role
             </th>
             <th>
                 @Html.DisplayNameFor(m => m.Name)
@@ -42,7 +42,14 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(m => item.Id)
+                @if (item.IsAdvisor)
+                {
+                    @Html.DisplayNameFor(m => item.IsAdvisor)
+                }
+                else if (item.IsSuperAdmin)
+                {
+                    @Html.DisplayNameFor(m => item.IsSuperAdmin)
+                }
             </td>
             <td>
                 @Html.DisplayFor(m => item.Name)
@@ -59,10 +66,11 @@
             <td>
                 @if (item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
                 {
-                    <a type="button" class="btn btn-primary" href=@Url.Action("Edit/" +item.Id)>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a type="button" class="btn btn-danger" href=@Url.Action("Delete/" +item.Id)>
+                    
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 }

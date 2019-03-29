@@ -106,7 +106,7 @@ namespace CPAT.Areas.Identity.Pages.Account
                     {
                         await _userManager.AddToRoleAsync(user, SD.AdvisorEndUser);
                     }
-                    else
+                    else if (!Input.IsAdvsor || !Input.IsSuperAdmin)
                     {
                         await _userManager.AddToRoleAsync(user, SD.RegularEndUser);
                     }

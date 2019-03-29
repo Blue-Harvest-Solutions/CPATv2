@@ -31,15 +31,22 @@ namespace CPAT.Areas.Academic.Controllers
         public IActionResult Index()
         {
             List<int> lstCourseCart = HttpContext.Session.Get<List<int>>("sessionCourseCart");
+
+            if(lstCourseCart == null)
+            {
+                return View(CourseCartviewmodel);
+            }
+
             if (lstCourseCart.Count > 0)
             {
                 foreach (int cartItem in lstCourseCart)
                 {
                     //Courses prod = _db.Products.Include(p => p.SpecialTags).Include(p => p.ProductTypes).Where(p => p.Id == cartItem).FirstOrDefault();
-                    Courses course = _db.Courses.Where(p=> p.Id == cartItem).FirstOrDefault();
+                    Courses course = _db.Courses.Where(p => p.Id == cartItem).FirstOrDefault();
                     CourseCartviewmodel.Courses.Add(course);
                 }
             }
+           
             return View(CourseCartviewmodel);
         }
 

@@ -61,7 +61,7 @@
 
             </div>
             <div class="col-4">
-                <input type="number" asp-for="CreditHours" class="form-control" />
+                <input type="number" max="4" min="0" asp-for="CreditHours" class="form-control" />
             </div>
             <span asp-validation-for="CreditHours" class="text-danger"></span>
 
