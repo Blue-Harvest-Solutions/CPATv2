@@ -78,18 +78,21 @@ namespace CPAT.Areas.Admin.Controllers
                     await _roleManager.CreateAsync(new IdentityRole(SD.RegularEndUser));
                 }
 
+
+                await _userManager.RemoveFromRoleAsync(userFromDb, SD.SuperAdminEndUser);
+                await _userManager.RemoveFromRoleAsync(userFromDb, SD.AdvisorEndUser);
+
                 if (userFromDb.IsSuperAdmin)
                 {
                     await _userManager.AddToRoleAsync(userFromDb, SD.SuperAdminEndUser);
                 }
-                else if (userFromDb.IsAdvisor)
+                if (userFromDb.IsAdvisor)
                 {
                     await _userManager.AddToRoleAsync(userFromDb, SD.AdvisorEndUser);
                 }
-                else if (!userFromDb.IsAdvisor || !userFromDb.IsSuperAdmin)
+                if (!userFromDb.IsAdvisor || !userFromDb.IsSuperAdmin)
                 {
-                    var roles = await _userManager.GetRolesAsync(userFromDb);
-                    await _userManager.RemoveFromRolesAsync(userFromDb, roles.ToArray());
+                    //var roles = await _userManager.GetRolesAsync(userFromDb);
                     await _userManager.AddToRoleAsync(userFromDb, SD.RegularEndUser);
                 }
 
