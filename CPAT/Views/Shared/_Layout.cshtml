@@ -39,48 +39,54 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Academic" asp-controller="Home" asp-action="Index">CPAT</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Courses" asp-action="Index">Courses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="AcademicTerms" asp-action="Index">Academic Terms</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="MajorRequirements" asp-action="Index">Major Requirements</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Academic" asp-controller="StudentPlan" asp-action="Index">Student Plan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Academic" asp-controller="CoursePlanner" asp-action="Index">Course Planner</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Users</a>
-                        </li>
-
-                        @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("sessionCourseCart") != null)
+                        @if (ViewContext.HttpContext.User.IsInRole("Super Admin"))
                         {
-                            <li style="color:black">
-
-                                <a asp-area="Academic" asp-controller="CourseCart" asp-action="Index" class="nav-link text-dark">
-                                    <i>Courses in Cart</i>
-                                    @{
-                                        var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("sessionCourseCart").Count;
-                                    }
-                                    (@count)
-                                </a>
-
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Courses" asp-action="Index">Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="AcademicTerms" asp-action="Index">Academic Terms</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="MajorRequirements" asp-action="Index">Major Requirements</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Users</a>
                             </li>
                         }
-                        else
+                        @if (ViewContext.HttpContext.User.IsInRole("Regular User"))
                         {
-                            <li style="color:black">
-                                <a asp-area="Academic" asp-controller="CourseCart" asp-action="Index" class="nav-link text-dark">
-                                    <i>Courses in cart</i> &nbsp;
-
-                                    (0)
-                                </a>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Academic" asp-controller="StudentPlan" asp-action="Index">Student Plan</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Academic" asp-controller="CoursePlanner" asp-action="Index">Course Planner</a>
+                            </li>
+
+                            @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("sessionCourseCart") != null)
+                            {
+                                <li style="color:black">
+
+                                    <a asp-area="Academic" asp-controller="CourseCart" asp-action="Index" class="nav-link text-dark">
+                                        <i>Courses in Cart</i>
+                                        @{
+                                            var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("sessionCourseCart").Count;
+                                        }
+                                        (@count)
+                                    </a>
+
+                                </li>
+                            }
+                            else
+                            {
+                                <li style="color:black">
+                                    <a asp-area="Academic" asp-controller="CourseCart" asp-action="Index" class="nav-link text-dark">
+                                        <i>Courses in cart</i> &nbsp;
+
+                                        (0)
+                                    </a>
+                                </li>
+                            }
                         }
 
                         <li class="nav-item">
