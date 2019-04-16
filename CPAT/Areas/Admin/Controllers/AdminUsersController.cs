@@ -81,6 +81,7 @@ namespace CPAT.Areas.Admin.Controllers
 
                 await _userManager.RemoveFromRoleAsync(userFromDb, SD.SuperAdminEndUser);
                 await _userManager.RemoveFromRoleAsync(userFromDb, SD.AdvisorEndUser);
+                await _userManager.RemoveFromRoleAsync(userFromDb, SD.RegularEndUser);
 
                 if (userFromDb.IsSuperAdmin)
                 {
@@ -90,7 +91,7 @@ namespace CPAT.Areas.Admin.Controllers
                 {
                     await _userManager.AddToRoleAsync(userFromDb, SD.AdvisorEndUser);
                 }
-                if (!userFromDb.IsAdvisor || !userFromDb.IsSuperAdmin)
+                if (userFromDb.IsRegUser)
                 {
                     //var roles = await _userManager.GetRolesAsync(userFromDb);
                     await _userManager.AddToRoleAsync(userFromDb, SD.RegularEndUser);

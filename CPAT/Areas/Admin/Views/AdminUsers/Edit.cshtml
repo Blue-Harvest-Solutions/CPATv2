@@ -29,30 +29,41 @@
                 <input asp-for="Email" readonly class="form-control" />
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="IsAdvisor"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="IsAdvisor" type="checkbox" class="form-control" />
-            </div>
-        </div>
 
         <div>
-            <div class="col-2">
-                <label asp-for="IsSuperAdmin"></label>
+            <div >
+                <div class="col-2">
+                    <label asp-for="IsAdvisor"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="IsAdvisor" value="false" type="radio" class="form-control" />
+                </div>
             </div>
-            <div class="col-5">
-                <input asp-for="IsSuperAdmin" type="checkbox" class="form-control" />
+
+            <div>
+                <div class="col-2">
+                    <label asp-for="IsSuperAdmin"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="IsSuperAdmin" value="false" type="radio" class="form-control" />
+                </div>
+            </div>
+
+            <div>
+                <div class="col-2">
+                    <label asp-for="IsRegUser"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="IsRegUser" value="false" type="radio" class="form-control"/>
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" asp-route-id="@Model.Id" value="Update" />
+                <a asp-action="Index" class="btn btn-success">Back to List</a>
             </div>
         </div>
-
-        <br />
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" asp-route-id="@Model.Id" value="Update" />
-            <a asp-action="Index" class="btn btn-success">Back to List</a>
-        </div>
-
 
     </div>
 </form>
