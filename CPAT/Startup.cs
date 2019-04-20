@@ -43,7 +43,10 @@ namespace CPAT
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddScoped<IDbInitializer,DbInitializer>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -52,7 +55,7 @@ namespace CPAT
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +73,7 @@ namespace CPAT
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            dbInitializer.Initialize();
             app.UseAuthentication();
             app.UseSession();
             app.UseMvc(routes =>

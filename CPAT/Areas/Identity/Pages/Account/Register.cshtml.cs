@@ -84,7 +84,7 @@ namespace CPAT.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-
+                    /*
                     if (!await _roleManager.RoleExistsAsync(SD.AdvisorEndUser))
                     {
                         await _roleManager.CreateAsync(new IdentityRole(SD.AdvisorEndUser));
@@ -97,6 +97,7 @@ namespace CPAT.Areas.Identity.Pages.Account
                     {
                         await _roleManager.CreateAsync(new IdentityRole(SD.RegularEndUser));
                     }
+                    */
 
                     if (Input.IsSuperAdmin)
                     {

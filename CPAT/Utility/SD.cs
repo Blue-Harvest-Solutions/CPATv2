@@ -8,7 +8,7 @@ namespace CPAT.Utility
     public class SD
     {
         public const string AdvisorEndUser = "Advisor";
-        public const string SuperAdminEndUser = "Super Admin";
+        public const string SuperAdminEndUser = "Administrator";
         public const string RegularEndUser = "Regular User";
     }
 }

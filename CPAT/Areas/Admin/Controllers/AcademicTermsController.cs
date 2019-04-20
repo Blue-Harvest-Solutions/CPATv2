@@ -20,6 +20,7 @@ namespace CPAT.Areas.Admin.Controllers
 
         public AcademicTermsController(ApplicationDbContext context)
         {
+            int CurrentYear = DateTime.Now.Year;
             _context = context;
         }
 
